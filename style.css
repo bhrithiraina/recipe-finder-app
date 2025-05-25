@@ -49,7 +49,24 @@
   color: #fff;
 }
 
+.famous-recipes {
+  width: 80%;
+  margin: 40px auto;
+  text-align: center;
+}
 
+.famous-recipes h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #f4a261;
+}
+
+.indian-recipes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 30px;
+  place-items: center;
+}
 
 * {
     margin: 0;
