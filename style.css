@@ -1,32 +1,27 @@
+/* Home Header */
 .home-header {
   background: linear-gradient(135deg, #2c3e50, #4ca1af);
-  padding: 40px 20px;
+  padding: 80px 20px;
   text-align: center;
   color: #fff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
+.overlay {
+  position: relative;
+  z-index: 2;
+}
+
 .home-header h1 {
-  font-size: 3rem;
-  letter-spacing: 2px;
+  font-size: 3.5rem;
   font-weight: 900;
   text-transform: uppercase;
 }
 
-/* Main content */
-.home-main {
-  max-width: 1200px;
-  margin: 40px auto 80px;
-  padding: 0 20px;
-  text-align: center;
-  color: #333;
-}
-
 .home-description {
   font-size: 1.5rem;
-  margin-bottom: 30px;
-  color: #555;
+  margin: 20px 0 30px;
   font-weight: 500;
 }
 
@@ -49,24 +44,69 @@
   color: #fff;
 }
 
-.famous-recipes {
-  width: 80%;
+/* Main Content */
+.home-main {
+  max-width: 1200px;
   margin: 40px auto;
+  padding: 0 20px;
   text-align: center;
 }
 
-.famous-recipes h2 {
+.section-title {
   font-size: 2rem;
-  margin-bottom: 20px;
-  color: #f4a261;
+  margin-bottom: 30px;
+  color: #2c3e50;
 }
 
-.indian-recipes-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 30px;
-  place-items: center;
+/* Featured Recipes Grid */
+.featured-recipes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
 }
+
+.recipe-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 250px;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.recipe-card:hover {
+  transform: scale(1.05);
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.recipe-card h3 {
+  font-size: 1.2rem;
+  padding: 10px;
+  color: #333;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .home-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .home-description {
+    font-size: 1.2rem;
+  }
+
+  .recipe-card {
+    width: 90%;
+  }
+}
+
 
 * {
     margin: 0;
@@ -162,7 +202,7 @@ form button[type="submit"]:hover, .recipe button:hover, .recipe-close-btn:hover 
     margin-block: 5px;
 }
 
-recipe p {
+.recipe p {
     font-size: 20px;
     color: #4a4a4a;
     margin: 5px 0;
