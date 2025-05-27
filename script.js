@@ -21,6 +21,7 @@ const fetchRecipes = async (query) => {
             <h3>${meal.strMeal}</h3>
             <p><span>${meal.strArea}</span> Dish</p>
             <p>Belongs to <span>${meal.strCategory}</span> Category</p>
+           ${meal.strYoutube ? `<a href="${meal.strYoutube}" target="_blank" class="youtube-btn"><i class="fab fa-youtube"></i> Watch on YouTube</a>` : ''}
         `
         const button = document.createElement('button');
         button.textContent = "View Recipe";
@@ -65,6 +66,9 @@ const openRecipePopup = (meal) => {
             <h3>Instructions:</h3>
             <p >${meal.strInstructions}</p>
         </div>
+        ${meal.strYoutube ? `<div style="text-align:center; margin-top:20px;">
+    <a href="${meal.strYoutube}" target="_blank" class="youtube-btn"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+</div>` : ''}
     `
 
     recipeDetailsContent.parentElement.style.display = "block";

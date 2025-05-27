@@ -107,6 +107,41 @@
   }
 }
 
+.youtube-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* space between icon and text */
+  background-color: #FF0000; /* YouTube red */
+  color: white;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+}
+
+.youtube-btn:hover {
+  background-color: #cc0000;
+  box-shadow: 0 6px 20px rgba(204, 0, 0, 0.6);
+  text-decoration: none;
+  color: white;
+}
+
+.youtube-btn i {
+  font-size: 1.3rem;
+  /* Optional: add a subtle animation on hover */
+  transition: transform 0.3s ease;
+}
+
+.youtube-btn:hover i {
+  transform: scale(1.2);
+}
+
 
 * {
     margin: 0;
