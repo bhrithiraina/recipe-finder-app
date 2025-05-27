@@ -29,6 +29,13 @@ function renderMeals(meals) {
       <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
       <h3>${meal.strMeal}</h3>
     `;
+
+    // Adding click event to trigger a detailed search
+    card.addEventListener('click', () => {
+      document.querySelector('.searchBox').value = meal.strMeal;
+      fetchRecipes(meal.strMeal);
+    });
+
     featuredContainer.appendChild(card);
   });
 }

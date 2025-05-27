@@ -20,7 +20,7 @@ const fetchRecipes = async (query) => {
             <img src="${meal.strMealThumb}">
             <h3>${meal.strMeal}</h3>
             <p><span>${meal.strArea}</span> Dish</p>
-            <p>BElongs to <span>${meal.strCategory}</span> Category</p>
+            <p>Belongs to <span>${meal.strCategory}</span> Category</p>
         `
         const button = document.createElement('button');
         button.textContent = "View Recipe";
@@ -33,6 +33,9 @@ const fetchRecipes = async (query) => {
 
         recipeFinder.appendChild(recipeDiv);
         });
+
+        // Scroll to result section
+        document.querySelector('.recipe-finder').scrollIntoView({ behavior: 'smooth' });
     } catch (error) {
         recipeFinder.innerHTML = "<h2>Error in Fetching Recipes...</h2>";
     }
@@ -82,51 +85,3 @@ searchBtn.addEventListener('click', (e)=> {
     fetchRecipes(searchInput);
 });  
 
-const indianRecipesList = document.querySelector('.indian-recipes-list');
-
-// List of Indian recipe names to fetch
-const famousIndianRecipes = [
-  "Butter Chicken",
-  "Tandoori Chicken",
-  "Chicken Handi",
-  "Dal Fry",
-  "Palak Paneer"
-];
-
-const fetchIndianRecipes = async () => {
-  indianRecipesList.innerHTML = "<p>Loading famous Indian recipes...</p>";
-
-  indianRecipesList.innerHTML = ""; // clear
-
-  for (const recipeName of famousIndianRecipes) {
-    try {
-      const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(recipeName)}`);
-      const data = await res.json();
-
-      if (data.meals && data.meals.length > 0) {
-        const meal = data.meals[0]; // take the first match
-        const recipeDiv = document.createElement('div');
-        recipeDiv.classList.add('recipe');
-        recipeDiv.innerHTML = `
-          <img src="${meal.strMealThumb}" alt="Image of ${meal.strMeal}">
-          <h3>${meal.strMeal}</h3>
-          <p><span>${meal.strArea}</span> Dish</p>
-          <p>Belongs to <span>${meal.strCategory}</span> Category</p>
-        `;
-        const button = document.createElement('button');
-        button.textContent = "View Recipe";
-        recipeDiv.appendChild(button);
-
-        button.addEventListener('click', () => {
-          openRecipePopup(meal);
-        });
-
-        indianRecipesList.appendChild(recipeDiv);
-      }
-    } catch (error) {
-      console.error(`Failed to fetch ${recipeName}`, error);
-    }
-  }
-};
-
-fetchIndianRecipes();
