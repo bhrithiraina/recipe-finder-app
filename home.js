@@ -8,7 +8,7 @@ async function fetchRandomMeals(count = 4) {
 
   for (let i = 0; i < count; i++) {
     try {
-      const res = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+      const res = await fetch('http://localhost:5000/api/recipes/search?q=${query}');
       const data = await res.json();
       meals.push(data.meals[0]);
     } catch (err) {

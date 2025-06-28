@@ -9,7 +9,7 @@ const recipeCloseBtn = document.querySelector('.recipe-close-btn');
 const fetchRecipes = async (query) => {
     recipeFinder.innerHTML = "<h2>Fetching Recipes...</h2>";
     try {
-        const data = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
+        const data = await fetch(`http://localhost:5000/api/recipes/search?q=${query}`);
         const response = await data.json();
 
         recipeFinder.innerHTML = "";
