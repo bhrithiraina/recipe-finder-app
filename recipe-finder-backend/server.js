@@ -19,6 +19,11 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+const authRoutes = require('./routes/auth');
+
+app.use('/api/auth', authRoutes);
+
+
 // Sample API route to search meals
 app.get('/api/recipes/search', async (req, res) => {
   const query = req.query.q;
