@@ -6,6 +6,7 @@ const recipeCloseBtn = document.querySelector('.recipe-close-btn');
 
 
 //Function to get recipes
+
 const fetchRecipes = async (query) => {
     recipeFinder.innerHTML = "<h2>Fetching Recipes...</h2>";
     try {
@@ -51,7 +52,7 @@ const fetchIngredients = (meal) => {
             const measure = meal[`strMeasure${i}`];
             ingredientsList += `<li>${measure} ${ingredient}</li>`
         }
-        else{
+        else {
             break;
         }
     }
