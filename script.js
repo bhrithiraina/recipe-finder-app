@@ -43,6 +43,70 @@ const fetchRecipes = async (query) => {
     }
 }
 
+const registerForm = document.getElementById('registerForm');
+const loginForm = document.getElementById('loginForm');
+const logoutBtn = document.getElementById('logoutBtn');
+
+// REGISTER
+registerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = registerForm.email.value;
+  const password = registerForm.password.value;
+
+  try {
+    const res = await fetch('http://localhost:5000/api/auth/register', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert('Registration successful! Please login.');
+      registerForm.reset();
+    } else {
+      alert(data.message);
+    }
+  } catch (err) {
+    alert('Error registering user');
+  }
+});
+
+// LOGIN
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = loginForm.email.value;
+  const password = loginForm.password.value;
+
+  try {
+    const res = await fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      localStorage.setItem('token', data.token);
+      alert('Login successful!');
+      loginForm.reset();
+      logoutBtn.style.display = 'inline';
+    } else {
+      alert(data.message);
+    }
+  } catch (err) {
+    alert('Error logging in');
+  }
+});
+
+// LOGOUT
+logoutBtn.addEventListener('click', () => {
+  localStorage.removeItem('token');
+  alert('Logged out');
+  logoutBtn.style.display = 'none';
+});
+
+
 // Function to fetch ingredients and measurements 
 const fetchIngredients = (meal) => {
     let ingredientsList = "";
@@ -89,4 +153,8 @@ searchBtn.addEventListener('click', (e)=> {
     }
     fetchRecipes(searchInput);
 });  
+
+if (localStorage.getItem('token')) {
+  logoutBtn.style.display = 'inline';
+}
 
