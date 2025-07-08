@@ -152,6 +152,7 @@ const fetchFavorites = async () => {
 
     const data = await res.json();
     favoritesSection.innerHTML = "<h3>Your Favorites:</h3>";
+
     data.forEach(meal => {
       const favDiv = document.createElement('div');
       favDiv.classList.add('recipe');
@@ -161,6 +162,34 @@ const fetchFavorites = async () => {
         <p><span>${meal.strArea}</span> Dish</p>
         <p>Belongs to <span>${meal.strCategory}</span> Category</p>
       `;
+
+      //  Add Remove button
+      const removeBtn = document.createElement('button');
+      removeBtn.textContent = ' Remove from Favorites';
+      removeBtn.classList.add('remove-fav-btn');
+
+      removeBtn.addEventListener('click', async () => {
+        try {
+          const deleteRes = await fetch(`http://localhost:5000/api/auth/favorites/${meal.idMeal}`, {
+            method: 'DELETE',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          const deleteData = await deleteRes.json();
+          if (deleteRes.ok) {
+            alert('Removed from favorites');
+            fetchFavorites(); // Refresh list after removal
+          } else {
+            alert(deleteData.message);
+          }
+        } catch (err) {
+          alert('Error removing favorite');
+        }
+      });
+
+      favDiv.appendChild(removeBtn);
       favoritesSection.appendChild(favDiv);
     });
 
@@ -168,6 +197,7 @@ const fetchFavorites = async () => {
     favoritesSection.innerHTML = "<p>Failed to load favorites</p>";
   }
 };
+
 
 
 // LOGOUT

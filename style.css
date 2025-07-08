@@ -161,6 +161,21 @@
   border-radius: 4px;
 }
 
+.remove-fav-btn {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.remove-fav-btn:hover {
+  background-color: #d62828;
+}
+
+
 
 
 * {
