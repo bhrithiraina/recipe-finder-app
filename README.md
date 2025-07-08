@@ -47,10 +47,15 @@ PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 
-4. start the server
+4. start the backend server
 node server.js
 Or, if you're using nodemon for development:
 npx nodemon server.js
 
 visit the app 
 Go to http://localhost:5000 to use the app.
+
+Run frontend
+Simply open the index.html file in your browser:
+
+ Make sure the backend is running before using features like login or recipe fetching.
