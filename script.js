@@ -128,6 +128,7 @@ loginForm.addEventListener('submit', async (e) => {
       alert('Login successful!');
       loginForm.reset();
       logoutBtn.style.display = 'inline';
+      fetchFavorites();
     } else {
       alert(data.message);
     }
@@ -135,6 +136,39 @@ loginForm.addEventListener('submit', async (e) => {
     alert('Error logging in');
   }
 });
+
+const favoritesSection = document.getElementById('favoritesSection');
+
+const fetchFavorites = async () => {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  try {
+    const res = await fetch('http://localhost:5000/api/auth/favorites', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const data = await res.json();
+    favoritesSection.innerHTML = "<h3>Your Favorites:</h3>";
+    data.forEach(meal => {
+      const favDiv = document.createElement('div');
+      favDiv.classList.add('recipe');
+      favDiv.innerHTML = `
+        <img src="${meal.strMealThumb}">
+        <h3>${meal.strMeal}</h3>
+        <p><span>${meal.strArea}</span> Dish</p>
+        <p>Belongs to <span>${meal.strCategory}</span> Category</p>
+      `;
+      favoritesSection.appendChild(favDiv);
+    });
+
+  } catch (err) {
+    favoritesSection.innerHTML = "<p>Failed to load favorites</p>";
+  }
+};
+
 
 // LOGOUT
 logoutBtn.addEventListener('click', () => {
@@ -193,5 +227,6 @@ searchBtn.addEventListener('click', (e)=> {
 
 if (localStorage.getItem('token')) {
   logoutBtn.style.display = 'inline';
+  fetchFavorites();
 }
 

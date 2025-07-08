@@ -34,4 +34,15 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = {register, login};
+
+const getFavorites = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    res.json(user.favorites || []);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to get favorites' });
+  }
+};
+
+module.exports = {register, login, getFavorites};
+
