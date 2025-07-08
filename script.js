@@ -33,8 +33,45 @@ const fetchRecipes = async (query) => {
             openRecipePopup(meal);
         });
 
+        const favButton = document.createElement('button');
+        favButton.textContent = "❤️ Add to Favorites";
+        favButton.classList.add('fav-btn');
+
+        favButton.addEventListener('click', async () => {
+            const token = localStorage.getItem('token');
+                if (!token) {
+                    alert('Please login to save favorites.');
+                    return;
+                }
+
+                try {
+                    const res = await fetch('http://localhost:5000/api/auth/favorites', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(meal)
+                    });
+
+                    const data = await res.json();
+                        if (res.ok) {
+                            alert('Added to favorites!');
+                        } else {
+                            alert(data.message);
+                        }
+                } catch (err) {
+                    alert('Error adding to favorites');
+                }
+        }); 
+
+        recipeDiv.appendChild(favButton);
+
+
         recipeFinder.appendChild(recipeDiv);
         });
+
+
 
         // Scroll to result section
         document.querySelector('.recipe-finder').scrollIntoView({ behavior: 'smooth' });

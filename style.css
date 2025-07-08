@@ -151,6 +151,16 @@
   text-align: center;
 }
 
+.fav-btn {
+  background-color: #ff476f;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-top: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
 
 
 * {
