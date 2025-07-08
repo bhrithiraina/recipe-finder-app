@@ -20,8 +20,10 @@ app.use(cors());
 app.use(express.json());
 
 const authRoutes = require('./routes/auth');
+const favoritesRoutes = require('./routes/favorites');
 
 app.use('/api/auth', authRoutes);
+app.use('/api/auth', favoritesRoutes);
 
 
 // Sample API route to search meals
