@@ -153,6 +153,11 @@ const fetchFavorites = async () => {
     const data = await res.json();
     favoritesSection.innerHTML = "<h3>Your Favorites:</h3>";
 
+    if (data.length === 0) {
+      favoritesSection.innerHTML += "<p class='no-favorites-message'>You have no favorites yet.</p>";
+      return;
+    }
+
     data.forEach(meal => {
       const favDiv = document.createElement('div');
       favDiv.classList.add('recipe');
@@ -163,7 +168,6 @@ const fetchFavorites = async () => {
         <p>Belongs to <span>${meal.strCategory}</span> Category</p>
       `;
 
-      //  Add Remove button
       const removeBtn = document.createElement('button');
       removeBtn.textContent = ' Remove from Favorites';
       removeBtn.classList.add('remove-fav-btn');
@@ -200,12 +204,16 @@ const fetchFavorites = async () => {
 
 
 
+
 // LOGOUT
 logoutBtn.addEventListener('click', () => {
   localStorage.removeItem('token');
   alert('Logged out');
   logoutBtn.style.display = 'none';
+  authSection.style.display = 'block';
+  favoritesSection.innerHTML = ''; // Clear favorites
 });
+
 
 
 // Function to fetch ingredients and measurements 
@@ -255,8 +263,14 @@ searchBtn.addEventListener('click', (e)=> {
     fetchRecipes(searchInput);
 });  
 
+const authSection = document.getElementById('auth-section');
+
 if (localStorage.getItem('token')) {
   logoutBtn.style.display = 'inline';
+  authSection.style.display = 'none';
   fetchFavorites();
+} else {
+  authSection.style.display = 'block';
 }
+
 
